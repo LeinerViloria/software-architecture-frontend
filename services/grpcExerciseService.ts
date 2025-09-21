@@ -19,7 +19,7 @@ export class GrpcExerciseService {
   private readonly client: any;
 
   constructor() {
-    const address = process.env.NEXT_PUBLIC_GRPC_EXERCISE_SERVER;
+    const address = process.env.GRPC_EXERCISE_SERVER;
     this.client = new proto.ExerciseService(address, grpc.credentials.createInsecure());
   }
 
