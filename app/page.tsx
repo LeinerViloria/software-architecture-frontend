@@ -5,7 +5,7 @@ import { topics } from '@/data/topics';
 import { categoriesWithTopics } from '@/data/categories_and_topics';
 import { Header } from '@/components/roadmap/Header';
 import { CategoryGrid } from '@/components/roadmap/CategoryGrid';
-import { TopicList } from '@/components/roadmap/TopicList';
+import { TopicResults } from '@/components/roadmap/TopicResults';
 
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -49,7 +49,7 @@ export default function HomePage() {
         />
 
         {/* 📚 Lista de temas */}
-        <TopicList topics={filteredTopics} viewMode={viewMode} />
+        <TopicResults topics={topics} viewMode={viewMode} />
       </main>
     </div>
   );
