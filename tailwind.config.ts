@@ -7,6 +7,18 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    'bg-blue-50', 'bg-blue-500', 'text-blue-600', 'border-blue-200',
+    'bg-purple-50', 'bg-purple-500', 'text-purple-600', 'border-purple-200',
+    'bg-green-50', 'bg-green-500', 'text-green-600', 'border-green-200',
+    'bg-cyan-50', 'bg-cyan-500', 'text-cyan-600', 'border-cyan-200',
+    'bg-red-50', 'bg-red-500', 'text-red-600', 'border-red-200',
+    'bg-yellow-50', 'bg-yellow-500', 'text-yellow-600', 'border-yellow-200',
+    'bg-indigo-50', 'bg-indigo-500', 'text-indigo-600', 'border-indigo-200',
+    'bg-pink-50', 'bg-pink-500', 'text-pink-600', 'border-pink-200',
+    'bg-orange-50', 'bg-orange-500', 'text-orange-600', 'border-orange-200',
+    'bg-teal-50', 'bg-teal-500', 'text-teal-600', 'border-teal-200',
+  ],
   theme: {
     extend: {
       backgroundImage: {

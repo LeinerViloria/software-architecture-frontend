@@ -1,16 +1,16 @@
 import { Category } from "@/types/roadmap";
 import {
-    Cloud,
-    Database, 
-    GitBranch, 
-    Layers, 
-    Server, 
-    Shield, 
-    Smartphone, 
-    Target, 
-    Users, 
-    Zap
-} from "lucide-react";
+  Target,
+  Layers,
+  Database,
+  Cloud,
+  Shield,
+  Zap,
+  Users,
+  GitBranch,
+  Server,
+  Smartphone
+} from 'lucide-react';
 
 export const categories: Category[] = [
     {
