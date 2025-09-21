@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'; // <-- Importa useRouter
 import { BookOpen, ChevronRight, Lightbulb, Search } from 'lucide-react';
-import { Topic, ViewMode } from '@/types/roadmap';
+import { Topic, TopicStatus, ViewMode } from '@/types/roadmap';
 import { categories } from '@/data/categories';
 import { Badge } from '../ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
@@ -34,8 +34,8 @@ export const TopicResults: React.FC<TopicResultsProps> = ({
     return matchesCategory && matchesSearch;
   });
 
-  const availableTopics = filteredTopics.filter(t => t.status === 'available');
-  const comingSoonTopics = filteredTopics.filter(t => t.status === 'coming-soon');
+  const availableTopics = filteredTopics.filter(t => t.status === TopicStatus.AVAILABLE);
+  const comingSoonTopics = filteredTopics.filter(t => t.status === TopicStatus.COMING_SOON);
 
   const getCategoryInfo = (categoryId: string) => categories.find(c => c.id === categoryId);
 
@@ -46,7 +46,7 @@ export const TopicResults: React.FC<TopicResultsProps> = ({
 
   const renderTopicCard = (topic: Topic) => {
     const categoryInfo = getCategoryInfo(topic.category);
-    const isAvailable = topic.status === 'available';
+    const isAvailable = topic.status === TopicStatus.AVAILABLE;
 
     return (
       <Card
