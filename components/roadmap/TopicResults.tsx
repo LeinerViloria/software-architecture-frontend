@@ -41,7 +41,7 @@ export const TopicResults: React.FC<TopicResultsProps> = ({
 
   const handleOpenExercise = (topicId: string) => {
     // Redirige a la página del tema
-    router.push(`/topics/${topicId}`);
+    router.push(`/exercise/${topicId}`);
   };
 
   const renderTopicCard = (topic: Topic) => {
