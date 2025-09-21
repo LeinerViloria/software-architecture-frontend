@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Design Patterns Mastery - Arquitecto de Software',
+  title: 'Arquitecto de Software',
   description: 'Plataforma de aprendizaje para dominar patrones de diseño y convertirte en arquitecto de software',
 };
 
