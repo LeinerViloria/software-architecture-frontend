@@ -2,7 +2,7 @@
 'use client';
 
 import { BookOpen, ChevronRight, Lightbulb, Search } from 'lucide-react';
-import { Topic } from '@/types/roadmap';
+import { Topic, ViewMode } from '@/types/roadmap';
 import { categories } from '@/data/categories';
 import { Badge } from '../ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
@@ -10,9 +10,9 @@ import { Button } from '../ui/button';
 
 interface TopicResultsProps {
   topics: Topic[];
-  viewMode: 'grid' | 'list';
+  viewMode: ViewMode;
   searchTerm?: string;
-  selectedCategory?: string;
+  selectedCategory?: string | null;
 }
 
 export const TopicResults: React.FC<TopicResultsProps> = ({
@@ -21,12 +21,20 @@ export const TopicResults: React.FC<TopicResultsProps> = ({
   searchTerm,
   selectedCategory
 }) => {
-  // Separar topics por status
-  const availableTopics = topics.filter(t => t.status === 'available');
-  const comingSoonTopics = topics.filter(t => t.status === 'coming-soon');
-  const filteredTopics = selectedCategory 
-    ? topics.filter(t => t.category === selectedCategory) 
-    : topics;
+  // Filtrado dinámico por categoría y búsqueda
+  const filteredTopics = topics.filter(topic => {
+    const matchesCategory = selectedCategory ? topic.category === selectedCategory : true;
+    const matchesSearch = searchTerm
+      ? topic.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        topic.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        topic.concepts.some(concept => concept.toLowerCase().includes(searchTerm.toLowerCase()))
+      : true;
+
+    return matchesCategory && matchesSearch;
+  });
+
+  const availableTopics = filteredTopics.filter(t => t.status === 'available');
+  const comingSoonTopics = filteredTopics.filter(t => t.status === 'coming-soon');
 
   const getCategoryInfo = (categoryId: string) => categories.find(c => c.id === categoryId);
 
@@ -34,18 +42,21 @@ export const TopicResults: React.FC<TopicResultsProps> = ({
     const categoryInfo = getCategoryInfo(topic.category);
     const isAvailable = topic.status === 'available';
 
-    const BadgeStatus = isAvailable 
-      ? <Badge variant="default" className="text-xs bg-green-500">Disponible</Badge>
-      : <Badge variant="secondary" className="text-xs">Próximamente</Badge>;
-
     return (
-      <Card key={topic.id} className={`group transition-all duration-300 cursor-pointer ${!isAvailable ? 'opacity-75 border-dashed' : 'hover:shadow-lg'}`}>
+      <Card
+        key={topic.id}
+        className={`group transition-all duration-300 cursor-pointer ${!isAvailable ? 'opacity-75 border-dashed' : 'hover:shadow-lg'}`}
+      >
         <CardHeader>
           <div className="flex items-center justify-between mb-2">
             <div className={`p-2 rounded-lg ${categoryInfo?.color} ${!isAvailable ? 'opacity-60' : ''}`}>
               {categoryInfo && <categoryInfo.icon className="h-5 w-5 text-white" />}
             </div>
-            {BadgeStatus}
+            {isAvailable ? (
+              <Badge variant="default" className="text-xs bg-green-500">Disponible</Badge>
+            ) : (
+              <Badge variant="secondary" className="text-xs">Próximamente</Badge>
+            )}
           </div>
           <CardTitle className={`text-lg ${!isAvailable ? 'text-gray-600' : 'group-hover:text-blue-600 transition-colors'}`}>
             {topic.name}
@@ -54,6 +65,7 @@ export const TopicResults: React.FC<TopicResultsProps> = ({
             {topic.description}
           </CardDescription>
         </CardHeader>
+
         {isAvailable && (
           <CardContent>
             <div className="space-y-4">
@@ -72,6 +84,7 @@ export const TopicResults: React.FC<TopicResultsProps> = ({
             </div>
           </CardContent>
         )}
+
         {!isAvailable && (
           <CardContent>
             <Button disabled className="w-full">Próximamente</Button>

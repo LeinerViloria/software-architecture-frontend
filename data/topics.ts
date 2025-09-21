@@ -1,4 +1,4 @@
-import { Topic } from "@/types/roadmap";
+import { Topic, TopicStatus } from "@/types/roadmap";
 
 export const topics: Topic[] = [
   // Patrones de Diseño
@@ -8,7 +8,7 @@ export const topics: Topic[] = [
     description: 'Garantiza una única instancia de una clase y proporciona acceso global a ella.',
     category: 'design-patterns',
     concepts: ['Instancia única', 'Acceso global', 'Control de instanciación'],
-    status: 'available'
+    status: TopicStatus.AVAILABLE
   },
   {
     id: 'factory-method',
@@ -16,7 +16,7 @@ export const topics: Topic[] = [
     description: 'Crea objetos sin especificar la clase exacta a crear.',
     category: 'design-patterns',
     concepts: ['Creación de objetos', 'Polimorfismo', 'Desacoplamiento'],
-    status: 'available'
+    status: TopicStatus.AVAILABLE
   },
   {
     id: 'observer',
@@ -24,7 +24,7 @@ export const topics: Topic[] = [
     description: 'Define dependencias uno-a-muchos entre objetos.',
     category: 'design-patterns',
     concepts: ['Notificaciones', 'Desacoplamiento', 'Suscriptores'],
-    status: 'available'
+    status: TopicStatus.AVAILABLE
   },
   {
     id: 'strategy',
@@ -32,7 +32,7 @@ export const topics: Topic[] = [
     description: 'Define una familia de algoritmos e intercambia entre ellos.',
     category: 'design-patterns',
     concepts: ['Algoritmos', 'Intercambio', 'Encapsulación'],
-    status: 'available'
+    status: TopicStatus.AVAILABLE
   },
   {
     id: 'decorator',
@@ -40,7 +40,7 @@ export const topics: Topic[] = [
     description: 'Añade funcionalidades a objetos dinámicamente sin alterar su estructura.',
     category: 'design-patterns',
     concepts: ['Extensibilidad', 'Composición', 'Flexibilidad'],
-    status: 'available'
+    status: TopicStatus.AVAILABLE
   },
 
   // Arquitectura de Software
@@ -50,7 +50,7 @@ export const topics: Topic[] = [
     description: 'Arquitectura que separa las preocupaciones en capas concéntricas.',
     category: 'software-architecture',
     concepts: ['Capas', 'Dependencias', 'Testabilidad'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
   {
     id: 'hexagonal-architecture',
@@ -58,7 +58,7 @@ export const topics: Topic[] = [
     description: 'Arquitectura que aísla el núcleo de la aplicación de factores externos.',
     category: 'software-architecture',
     concepts: ['Puertos', 'Adaptadores', 'Aislamiento'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
   {
     id: 'microservices',
@@ -66,7 +66,7 @@ export const topics: Topic[] = [
     description: 'Arquitectura que descompone aplicaciones en servicios pequeños e independientes.',
     category: 'software-architecture',
     concepts: ['Servicios independientes', 'Escalabilidad', 'Distribución'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
   {
     id: 'event-driven',
@@ -74,7 +74,7 @@ export const topics: Topic[] = [
     description: 'Arquitectura basada en la producción, detección y reacción a eventos.',
     category: 'software-architecture',
     concepts: ['Eventos', 'Asíncrono', 'Desacoplamiento'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
 
   // Bases de Datos
@@ -84,7 +84,7 @@ export const topics: Topic[] = [
     description: 'Principios y técnicas para diseñar bases de datos eficientes.',
     category: 'databases',
     concepts: ['Normalización', 'Índices', 'Relaciones'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
   {
     id: 'nosql-patterns',
@@ -92,7 +92,7 @@ export const topics: Topic[] = [
     description: 'Patrones de diseño específicos para bases de datos NoSQL.',
     category: 'databases',
     concepts: ['Documentos', 'Agregados', 'Desnormalización'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
   {
     id: 'caching-strategies',
@@ -100,7 +100,7 @@ export const topics: Topic[] = [
     description: 'Técnicas para implementar sistemas de cache efectivos.',
     category: 'databases',
     concepts: ['Cache-aside', 'Write-through', 'Invalidación'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
 
   // Cloud & DevOps
@@ -110,7 +110,7 @@ export const topics: Topic[] = [
     description: 'Patrones de diseño específicos para aplicaciones en la nube.',
     category: 'cloud-devops',
     concepts: ['Escalabilidad', 'Resilencia', 'Distribución'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
   {
     id: 'containerization',
@@ -118,7 +118,7 @@ export const topics: Topic[] = [
     description: 'Principios y prácticas de containerización con Docker y Kubernetes.',
     category: 'cloud-devops',
     concepts: ['Docker', 'Kubernetes', 'Orquestación'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
   {
     id: 'ci-cd-pipelines',
@@ -126,7 +126,7 @@ export const topics: Topic[] = [
     description: 'Diseño e implementación de pipelines de integración y despliegue continuo.',
     category: 'cloud-devops',
     concepts: ['Automatización', 'Testing', 'Deployment'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
 
   // Seguridad
@@ -136,7 +136,7 @@ export const topics: Topic[] = [
     description: 'Patrones para implementar seguridad en aplicaciones.',
     category: 'security',
     concepts: ['Autenticación', 'Autorización', 'Encriptación'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
   {
     id: 'oauth-implementation',
@@ -144,7 +144,7 @@ export const topics: Topic[] = [
     description: 'Implementación correcta de protocolos de autenticación OAuth.',
     category: 'security',
     concepts: ['OAuth 2.0', 'JWT', 'Tokens'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
 
   // Performance
@@ -154,7 +154,7 @@ export const topics: Topic[] = [
     description: 'Técnicas para optimizar el rendimiento de aplicaciones.',
     category: 'performance',
     concepts: ['Profiling', 'Caching', 'Lazy Loading'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
   {
     id: 'load-balancing',
@@ -162,7 +162,7 @@ export const topics: Topic[] = [
     description: 'Estrategias para distribuir carga entre múltiples servidores.',
     category: 'performance',
     concepts: ['Round Robin', 'Weighted', 'Health Checks'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
 
   // Liderazgo Técnico
@@ -172,7 +172,7 @@ export const topics: Topic[] = [
     description: 'Habilidades de liderazgo para arquitectos de software.',
     category: 'leadership',
     concepts: ['Mentoring', 'Decisiones técnicas', 'Comunicación'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
   {
     id: 'architecture-reviews',
@@ -180,7 +180,7 @@ export const topics: Topic[] = [
     description: 'Metodologías para revisar y evaluar arquitecturas de software.',
     category: 'leadership',
     concepts: ['Evaluación', 'Feedback', 'Mejora continua'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
 
   // Metodologías
@@ -190,7 +190,7 @@ export const topics: Topic[] = [
     description: 'Enfoque de diseño de software centrado en el dominio del negocio.',
     category: 'methodologies',
     concepts: ['Bounded Context', 'Aggregates', 'Domain Model'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
   {
     id: 'test-driven-development',
@@ -198,7 +198,7 @@ export const topics: Topic[] = [
     description: 'Metodología de desarrollo guiada por pruebas.',
     category: 'methodologies',
     concepts: ['Red-Green-Refactor', 'Unit Tests', 'Test First'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
 
   // Sistemas Distribuidos
@@ -208,7 +208,7 @@ export const topics: Topic[] = [
     description: 'Principios y patrones para sistemas distribuidos.',
     category: 'distributed-systems',
     concepts: ['Consistencia', 'Particionado', 'Tolerancia a fallos'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
   {
     id: 'message-queues',
@@ -216,7 +216,7 @@ export const topics: Topic[] = [
     description: 'Implementación y uso de sistemas de mensajería.',
     category: 'distributed-systems',
     concepts: ['Pub/Sub', 'Message Brokers', 'Async Processing'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
 
   // Mobile & Frontend
@@ -226,7 +226,7 @@ export const topics: Topic[] = [
     description: 'Patrones de arquitectura específicos para aplicaciones móviles.',
     category: 'mobile-frontend',
     concepts: ['MVVM', 'Clean Architecture', 'State Management'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   },
   {
     id: 'frontend-architecture',
@@ -234,6 +234,6 @@ export const topics: Topic[] = [
     description: 'Patrones y principios para arquitecturas frontend escalables.',
     category: 'mobile-frontend',
     concepts: ['Component Architecture', 'State Management', 'Module Federation'],
-    status: 'coming-soon'
+    status: TopicStatus.COMING_SOON
   }
 ];

@@ -1,11 +1,21 @@
 
+export enum ViewMode {
+  GRID = 'grid',
+  LIST = 'list'
+}
+
+export enum TopicStatus {
+  AVAILABLE = 'available',
+  COMING_SOON = 'coming-soon'
+}
+
 export interface Topic {
   id: string;
   name: string;
   description: string;
   category: string;
   concepts: string[];
-  status: 'available' | 'coming-soon';
+  status: TopicStatus;
 }
 
 export interface Category {

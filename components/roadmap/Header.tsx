@@ -3,12 +3,13 @@
 import { Code2, Search, Grid3X3, List } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { ViewMode } from '@/types/roadmap';
 
 interface HeaderProps {
   searchTerm: string;
   setSearchTerm: (value: string) => void;
-  viewMode: 'grid' | 'list';
-  setViewMode: (mode: 'grid' | 'list') => void;
+  viewMode: ViewMode;
+  setViewMode: (mode: ViewMode) => void;
 }
 
 export function Header({ searchTerm, setSearchTerm, viewMode, setViewMode }: HeaderProps) {
@@ -40,17 +41,17 @@ export function Header({ searchTerm, setSearchTerm, viewMode, setViewMode }: Hea
 
             <div className="flex items-center border rounded-lg p-1">
               <Button
-                variant={viewMode === 'grid' ? 'default' : 'ghost'}
+                variant={viewMode === ViewMode.GRID ? 'default' : 'ghost'}
                 size="sm"
-                onClick={() => setViewMode('grid')}
+                onClick={() => setViewMode(ViewMode.GRID)}
                 className="h-8 w-8 p-0"
               >
                 <Grid3X3 className="h-4 w-4" />
               </Button>
               <Button
-                variant={viewMode === 'list' ? 'default' : 'ghost'}
+                variant={viewMode === ViewMode.LIST ? 'default' : 'ghost'}
                 size="sm"
-                onClick={() => setViewMode('list')}
+                onClick={() => setViewMode(ViewMode.LIST)}
                 className="h-8 w-8 p-0"
               >
                 <List className="h-4 w-4" />

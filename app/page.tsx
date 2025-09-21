@@ -6,11 +6,12 @@ import { categoriesWithTopics } from '@/data/categories_and_topics';
 import { Header } from '@/components/roadmap/Header';
 import { CategoryGrid } from '@/components/roadmap/CategoryGrid';
 import { TopicResults } from '@/components/roadmap/TopicResults';
+import { ViewMode } from '@/types/roadmap';
 
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.GRID);
 
   // 🔍 Filtro de temas por categoría y búsqueda
   const filteredTopics = useMemo(() => {
@@ -49,7 +50,7 @@ export default function HomePage() {
         />
 
         {/* 📚 Lista de temas */}
-        <TopicResults topics={topics} viewMode={viewMode} />
+        <TopicResults topics={topics} viewMode={viewMode} searchTerm={searchTerm} selectedCategory={selectedCategory} />
       </main>
     </div>
   );
