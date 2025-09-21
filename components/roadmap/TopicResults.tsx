@@ -1,6 +1,6 @@
-// components/TopicResults.tsx
 'use client';
 
+import { useRouter } from 'next/navigation'; // <-- Importa useRouter
 import { BookOpen, ChevronRight, Lightbulb, Search } from 'lucide-react';
 import { Topic, ViewMode } from '@/types/roadmap';
 import { categories } from '@/data/categories';
@@ -21,7 +21,8 @@ export const TopicResults: React.FC<TopicResultsProps> = ({
   searchTerm,
   selectedCategory
 }) => {
-  // Filtrado dinámico por categoría y búsqueda
+  const router = useRouter(); // <-- Inicializa router
+
   const filteredTopics = topics.filter(topic => {
     const matchesCategory = selectedCategory ? topic.category === selectedCategory : true;
     const matchesSearch = searchTerm
@@ -37,6 +38,11 @@ export const TopicResults: React.FC<TopicResultsProps> = ({
   const comingSoonTopics = filteredTopics.filter(t => t.status === 'coming-soon');
 
   const getCategoryInfo = (categoryId: string) => categories.find(c => c.id === categoryId);
+
+  const handleOpenExercise = (topicId: string) => {
+    // Redirige a la página del tema
+    router.push(`/topics/${topicId}`);
+  };
 
   const renderTopicCard = (topic: Topic) => {
     const categoryInfo = getCategoryInfo(topic.category);
@@ -77,7 +83,10 @@ export const TopicResults: React.FC<TopicResultsProps> = ({
                   <Badge variant="secondary" className="text-xs">+{topic.concepts.length - 2} más</Badge>
                 )}
               </div>
-              <Button className="w-full group-hover:bg-blue-600 transition-colors">
+              <Button
+                className="w-full group-hover:bg-blue-600 transition-colors"
+                onClick={() => handleOpenExercise(topic.id)} // <-- Aquí agregamos el onclick
+              >
                 Abrir Ejercicio
                 <ChevronRight className="h-4 w-4 ml-2" />
               </Button>
@@ -111,7 +120,6 @@ export const TopicResults: React.FC<TopicResultsProps> = ({
 
   return (
     <div>
-      {/* Results Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-xl font-bold text-gray-900">
@@ -128,13 +136,9 @@ export const TopicResults: React.FC<TopicResultsProps> = ({
         </div>
       </div>
 
-      {/* Available Topics */}
       {renderTopicSection('Disponibles', availableTopics, <BookOpen className="h-5 w-5 text-green-600 mr-2" />)}
-
-      {/* Coming Soon Topics */}
       {renderTopicSection('Próximamente', comingSoonTopics, <Lightbulb className="h-5 w-5 text-amber-600 mr-2" />)}
 
-      {/* No Results */}
       {filteredTopics.length === 0 && (
         <Card className="text-center py-12">
           <CardContent>
