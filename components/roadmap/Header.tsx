@@ -1,33 +1,23 @@
 'use client';
 
-import { Code2, Menu, X, Search, Grid3X3, List } from 'lucide-react';
+import { Code2, Search, Grid3X3, List } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 interface HeaderProps {
-  sidebarOpen: boolean;
-  setSidebarOpen: (open: boolean) => void;
   searchTerm: string;
   setSearchTerm: (value: string) => void;
   viewMode: 'grid' | 'list';
   setViewMode: (mode: 'grid' | 'list') => void;
 }
 
-export function Header({ sidebarOpen, setSidebarOpen, searchTerm, setSearchTerm, viewMode, setViewMode }: HeaderProps) {
+export function Header({ searchTerm, setSearchTerm, viewMode, setViewMode }: HeaderProps) {
   return (
     <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo + Toggle */}
           <div className="flex items-center">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="lg:hidden mr-2"
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-            >
-              {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
             <Code2 className="h-8 w-8 text-blue-600 mr-3" />
             <div>
               <h1 className="text-xl font-bold text-gray-900">Arquitecto de Software</h1>

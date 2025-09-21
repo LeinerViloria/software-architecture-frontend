@@ -17,4 +17,5 @@ export interface Category {
   textColor: string;
   bgColor: string;
   borderColor: string;
+  topics?: Topic[];
 }
