@@ -4,218 +4,8 @@ import { ArrowLeft, Code2, BookOpen, Target, Lightbulb, CheckCircle } from 'luci
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-
-const exercises = {
-  'singleton': {
-    id: 'singleton',
-    name: 'Singleton',
-    description: 'Garantiza una única instancia de una clase y proporciona acceso global a ella.',
-    category: 'design-patterns',
-    categoryName: 'Patrones de Diseño',
-    concepts: ['Instancia única', 'Acceso global', 'Control de instanciación'],
-    objective: 'Implementar el patrón Singleton para gestionar una conexión a base de datos, asegurando que solo exista una instancia en toda la aplicación.',
-    requirements: [
-      'Crear una clase DatabaseConnection que implemente el patrón Singleton',
-      'Asegurar que solo se pueda crear una instancia de la clase',
-      'Proporcionar un método estático para obtener la instancia',
-      'Implementar lazy initialization (creación bajo demanda)',
-      'Manejar la concurrencia en entornos multi-hilo'
-    ],
-    hints: [
-      'Utiliza un constructor privado para evitar instanciación externa',
-      'Implementa un método estático getInstance()',
-      'Considera el uso de variables estáticas para almacenar la instancia',
-      'Piensa en la inicialización perezosa vs. inicialización temprana'
-    ],
-    examples: [
-      {
-        title: 'Estructura básica',
-        code: `class Singleton {
-  private static instance: Singleton;
-  
-  private constructor() {
-    // Constructor privado
-  }
-  
-  public static getInstance(): Singleton {
-    if (!Singleton.instance) {
-      Singleton.instance = new Singleton();
-    }
-    return Singleton.instance;
-  }
-}`
-      }
-    ]
-  },
-  'factory-method': {
-    id: 'factory-method',
-    name: 'Factory Method',
-    description: 'Crea objetos sin especificar la clase exacta a crear.',
-    category: 'design-patterns',
-    categoryName: 'Patrones de Diseño',
-    concepts: ['Creación de objetos', 'Polimorfismo', 'Desacoplamiento'],
-    objective: 'Implementar el patrón Factory Method para crear diferentes tipos de vehículos (Auto, Moto, Camión) sin especificar la clase exacta.',
-    requirements: [
-      'Crear una interfaz Vehicle con métodos comunes',
-      'Implementar clases concretas para cada tipo de vehículo',
-      'Crear una clase abstracta VehicleFactory con el método factory',
-      'Implementar factories concretas para cada tipo de vehículo',
-      'Demostrar el uso del patrón con ejemplos prácticos'
-    ],
-    hints: [
-      'Define una interfaz común para todos los productos',
-      'Usa clases abstractas para el creator',
-      'Cada factory concreta decide qué clase instanciar',
-      'El cliente trabaja con interfaces, no con clases concretas'
-    ],
-    examples: [
-      {
-        title: 'Estructura del Factory Method',
-        code: `interface Vehicle {
-  start(): void;
-  stop(): void;
-}
-
-abstract class VehicleFactory {
-  abstract createVehicle(): Vehicle;
-  
-  public operateVehicle(): void {
-    const vehicle = this.createVehicle();
-    vehicle.start();
-    // ... operaciones
-    vehicle.stop();
-  }
-}`
-      }
-    ]
-  },
-  'observer': {
-    id: 'observer',
-    name: 'Observer',
-    description: 'Define dependencias uno-a-muchos entre objetos.',
-    category: 'design-patterns',
-    categoryName: 'Patrones de Diseño',
-    concepts: ['Notificaciones', 'Desacoplamiento', 'Suscriptores'],
-    objective: 'Implementar el patrón Observer para un sistema de notificaciones donde múltiples usuarios pueden suscribirse a actualizaciones de noticias.',
-    requirements: [
-      'Crear una interfaz Observer con método update()',
-      'Implementar una clase Subject que mantenga lista de observers',
-      'Crear métodos para suscribir/desuscribir observers',
-      'Implementar el mecanismo de notificación a todos los observers',
-      'Crear observers concretos que reaccionen a las notificaciones'
-    ],
-    hints: [
-      'Mantén una lista de observers en el subject',
-      'Implementa métodos attach() y detach()',
-      'El método notify() debe llamar update() en todos los observers',
-      'Los observers deben poder acceder al estado del subject'
-    ],
-    examples: [
-      {
-        title: 'Estructura básica del Observer',
-        code: `interface Observer {
-  update(data: any): void;
-}
-
-class Subject {
-  private observers: Observer[] = [];
-  
-  attach(observer: Observer): void {
-    this.observers.push(observer);
-  }
-  
-  notify(data: any): void {
-    this.observers.forEach(observer => observer.update(data));
-  }
-}`
-      }
-    ]
-  },
-  'strategy': {
-    id: 'strategy',
-    name: 'Strategy',
-    description: 'Define una familia de algoritmos e intercambia entre ellos.',
-    category: 'design-patterns',
-    categoryName: 'Patrones de Diseño',
-    concepts: ['Algoritmos', 'Intercambio', 'Encapsulación'],
-    objective: 'Implementar el patrón Strategy para un sistema de cálculo de descuentos donde se pueden aplicar diferentes estrategias según el tipo de cliente.',
-    requirements: [
-      'Crear una interfaz DiscountStrategy con método calculateDiscount()',
-      'Implementar estrategias concretas (RegularCustomer, PremiumCustomer, VIPCustomer)',
-      'Crear una clase Context que use las estrategias',
-      'Permitir cambiar la estrategia en tiempo de ejecución',
-      'Demostrar el uso con diferentes tipos de descuentos'
-    ],
-    hints: [
-      'Encapsula cada algoritmo en una clase separada',
-      'Usa composición en lugar de herencia',
-      'El contexto delega el trabajo a la estrategia',
-      'Las estrategias deben ser intercambiables'
-    ],
-    examples: [
-      {
-        title: 'Estructura del Strategy',
-        code: `interface DiscountStrategy {
-  calculateDiscount(amount: number): number;
-}
-
-class ShoppingCart {
-  private strategy: DiscountStrategy;
-  
-  setDiscountStrategy(strategy: DiscountStrategy): void {
-    this.strategy = strategy;
-  }
-  
-  calculateTotal(amount: number): number {
-    return amount - this.strategy.calculateDiscount(amount);
-  }
-}`
-      }
-    ]
-  },
-  'decorator': {
-    id: 'decorator',
-    name: 'Decorator',
-    description: 'Añade funcionalidades a objetos dinámicamente sin alterar su estructura.',
-    category: 'design-patterns',
-    categoryName: 'Patrones de Diseño',
-    concepts: ['Extensibilidad', 'Composición', 'Flexibilidad'],
-    objective: 'Implementar el patrón Decorator para un sistema de bebidas donde se pueden agregar ingredientes adicionales (leche, azúcar, canela) dinámicamente.',
-    requirements: [
-      'Crear una interfaz Beverage con métodos cost() y description()',
-      'Implementar bebidas base (Coffee, Tea, HotChocolate)',
-      'Crear una clase abstracta BeverageDecorator',
-      'Implementar decoradores concretos para cada ingrediente',
-      'Permitir combinar múltiples decoradores'
-    ],
-    hints: [
-      'Los decoradores deben implementar la misma interfaz que el componente',
-      'Usa composición para envolver el objeto original',
-      'Cada decorador añade su funcionalidad y delega al componente',
-      'Los decoradores pueden apilarse unos sobre otros'
-    ],
-    examples: [
-      {
-        title: 'Estructura del Decorator',
-        code: `interface Beverage {
-  cost(): number;
-  description(): string;
-}
-
-abstract class BeverageDecorator implements Beverage {
-  protected beverage: Beverage;
-  
-  constructor(beverage: Beverage) {
-    this.beverage = beverage;
-  }
-  
-  abstract cost(): number;
-  abstract description(): string;
-}`
-      }
-    ]
-  }
-};
+import { grpcExerciseService } from '@/services/grpcExerciseService';
+import { Exercise } from '@/types/roadmap';
 
 interface ExercisePageProps {
   params: {
@@ -223,8 +13,15 @@ interface ExercisePageProps {
   };
 }
 
-export default function ExercisePage({ params }: ExercisePageProps) {
-  const exercise = exercises[params.id as keyof typeof exercises];
+export default async function ExercisePage({ params }: Readonly<ExercisePageProps>) {
+  let exercise: Exercise | null = null;
+
+  try {
+    exercise = await grpcExerciseService.getExercise(params.id);
+  } catch (error) {
+    console.error('Error fetching exercise:', error);
+    notFound();
+  }
 
   if (!exercise) {
     notFound();
@@ -249,7 +46,7 @@ export default function ExercisePage({ params }: ExercisePageProps) {
                 <p className="text-sm text-gray-600">{exercise.categoryName}</p>
               </div>
             </div>
-            
+
             <Badge variant="default" className="bg-blue-500">
               Ejercicio Práctico
             </Badge>
@@ -261,7 +58,7 @@ export default function ExercisePage({ params }: ExercisePageProps) {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Contenido Principal */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Descripción del Ejercicio */}
+            {/* Objetivo */}
             <Card>
               <CardHeader>
                 <div className="flex items-center space-x-2 mb-2">
@@ -284,12 +81,12 @@ export default function ExercisePage({ params }: ExercisePageProps) {
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3">
-                  {exercise.requirements.map((requirement, index) => (
+                  {exercise.requirements.map((req, index) => (
                     <li key={index} className="flex items-start space-x-3">
                       <div className="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium">
                         {index + 1}
                       </div>
-                      <span className="text-gray-700">{requirement}</span>
+                      <span className="text-gray-700">{req}</span>
                     </li>
                   ))}
                 </ul>
@@ -331,9 +128,7 @@ export default function ExercisePage({ params }: ExercisePageProps) {
             </Card>
           </div>
 
-          {/* Sidebar */}
           <div className="space-y-6">
-            {/* Conceptos Clave */}
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">Conceptos Clave</CardTitle>
@@ -369,7 +164,6 @@ export default function ExercisePage({ params }: ExercisePageProps) {
               </CardContent>
             </Card>
 
-            {/* Ejemplos de Código */}
             <Card>
               <CardHeader>
                 <div className="flex items-center space-x-2">
@@ -393,10 +187,4 @@ export default function ExercisePage({ params }: ExercisePageProps) {
       </div>
     </div>
   );
-}
-
-export async function generateStaticParams() {
-  return Object.keys(exercises).map((id) => ({
-    id,
-  }));
 }
