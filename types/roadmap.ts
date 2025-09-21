@@ -29,3 +29,21 @@ export interface Category {
   borderColor: string;
   topics?: Topic[];
 }
+
+export interface ExerciseExample {
+  title: string;
+  code: string;
+}
+
+export interface Exercise {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  categoryName: string;
+  concepts: string[];
+  objective: string;
+  requirements: string[];
+  hints: string[];
+  examples: ExerciseExample[];
+}
